@@ -3,12 +3,14 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { ElectionForm } from './electionsForm.entity';
 import { Repository } from 'typeorm';
 import { ElectionsFormDto } from './elections-form.dto';
+import { MailService } from 'src/mail/mail.service';
 
 @Injectable()
 export class ElectionsFormService {
   constructor(
     @InjectRepository(ElectionForm)
     private readonly electionFormRepository: Repository<ElectionForm>,
+    private readonly mailerService: MailService,
   ) {}
 
   async CreateElectionForm(data: ElectionsFormDto) {
@@ -39,8 +41,19 @@ export class ElectionsFormService {
       Rif: rifBuffer,
     });
 
+    const save = await this.electionFormRepository.save(electionForm);
+
+    const html = this.mailerService.reportCsvHtml(save);
+
+    const sendMail = await this.mailerService.sendCsvReport(
+      html,
+      electionForm.email,
+    );
+
+    console.log(sendMail);
+
     // Guardar en la base de datos
-    return this.electionFormRepository.save(electionForm);
+    return save;
   }
 
   /////////////////////////////////////////

@@ -9,10 +9,14 @@ import {
 import { ElectionsFormService } from './elections-form.service';
 import { ElectionsFormDto } from './elections-form.dto';
 import { FileInterceptor } from '@nestjs/platform-express';
+import { MailService } from 'src/mail/mail.service';
 
 @Controller('elections-form')
 export class ElectionsFormController {
-  constructor(private readonly electionsFormService: ElectionsFormService) {}
+  constructor(
+    private readonly electionsFormService: ElectionsFormService,
+    private readonly mailerService: MailService,
+  ) {}
 
   @Get()
   async getAllVotingData() {
