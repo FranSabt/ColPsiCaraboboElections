@@ -29,17 +29,17 @@ export class ElectionsFormService {
       where: { CI: data.CI, nulled: false },
     });
     if (vote1) {
-      return 'CI ya votó';
+      return {msj: 'CI ya votó', succes:false };
     }
     const vote2 = await this.electionFormRepository.findOne({
       where: { fpv: data.fpv, nulled: false },
     });
     if (vote2) {
-      return 'FPV ya votó';
+      return {msj: 'FPV ya votó', succes: false};
     }
     const rifBuffer = data.Rif ? Buffer.from(data.Rif, 'base64') : null;
     if (!rifBuffer) {
-      return 'Rif no puede ser vacío';
+      return {msj: 'Falta imagen de RIF', succes:false};
     }
     const electionForm = this.electionFormRepository.create({
       ...data,
@@ -52,9 +52,9 @@ export class ElectionsFormService {
       electionForm.email,
     );
 
-    this.logger.log(sendMail);
-    await this.addDataToSheet(save);
-    return save;
+    // this.logger.log(sendMail);
+    //await this.addDataToSheet(save);
+    return {msj: 'Exito', succes: true};
   }
 
   /////////////////////////////////////////////////////////////
@@ -109,21 +109,21 @@ export class ElectionsFormService {
   /////////////////////////////////////////
 
   async NullVote(id: number, password: string) {
-    if (password !== '123456') return;
+    if (password !== 'skinner_freud') return;
 
     const vote = await this.electionFormRepository.findOne({
       where: { id: id },
     });
 
     if (!vote) {
-      return 'Vote not found';
+      return {msj: 'Voto no encontrado', succes:false};;
     }
 
-    vote.nulled = true;
+    vote.nulled = !vote.nulled;
 
     await this.electionFormRepository.save(vote);
 
-    return 'voto anulado';
+    return {msj: 'Voto modificado', succes:true};;
   }
 
   /////////////////////////////////////////
@@ -145,7 +145,7 @@ export class ElectionsFormService {
     // Set headers to download the file 
     res.setHeader(
       'Content-Disposition',
-      `attachment; filename=${electionForm.lastName}-${electionForm.firstName}.jpg`,
+      `attachment; filename=${electionForm.fpv}.jpg`,
     );
     res.setHeader('Content-Type', 'image/png');
 
