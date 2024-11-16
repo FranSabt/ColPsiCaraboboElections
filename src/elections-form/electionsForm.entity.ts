@@ -55,7 +55,7 @@ export class ElectionForm {
   celPhone: string;
 
   @Column()
-  psiSelected: string;
+  psi: string;
 
   @Column()
   address: MunicipioCapitalEnum;
