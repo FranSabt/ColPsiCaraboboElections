@@ -13,7 +13,7 @@ import { ElectionForm } from './elections-form/electionsForm.entity';
       type: 'postgres',
       host: 'localhost',
       port: 5432,
-      username: 'fran',
+      username: 'postgres',
       password: '7448280',
       database: 'ColElections',
       entities: [ElectionForm],

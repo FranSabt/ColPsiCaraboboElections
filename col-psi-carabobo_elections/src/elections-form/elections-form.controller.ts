@@ -2,7 +2,10 @@ import {
   Body,
   Controller,
   Get,
+  Param,
   Post,
+  Put,
+  Res,
   UploadedFile,
   UseInterceptors,
 } from '@nestjs/common';
@@ -33,5 +36,15 @@ export class ElectionsFormController {
       data.Rif = file.buffer.toString('base64');
     }
     return await this.electionsFormService.CreateElectionForm(data);
+  }
+
+  @Put()
+  async updateVoting(@Body() data: any){
+    return this.electionsFormService.NullVote(data.id, data.password);
+  }
+
+  @Get('image/:id') 
+  async getImage(@Param('id') id: number, @Res() res: Response) { 
+    await this.electionsFormService.GetImage(id, res); 
   }
 }
