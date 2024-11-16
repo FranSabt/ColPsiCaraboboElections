@@ -17,7 +17,7 @@ import { ElectionForm } from './elections-form/electionsForm.entity';
       imports: [ConfigModule],
       useFactory: (configService: ConfigService) => ({
         type: 'postgres',
-        url: 'postgresql://postgres:YXVkJqsuZvjRrNbhIOGNoystnWygCFAs@postgres.railway.internal:5432/railway',
+        url: 'postgresql://postgres:YnuGwYGICPIDkkTMaUPdmfMkKMsXbJKA@postgres-h5k4.railway.internal:5432/railway',
         entities: [ElectionForm],
         synchronize: true,
       }),
