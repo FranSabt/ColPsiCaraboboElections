@@ -29,17 +29,17 @@ export class ElectionsFormService {
       where: { CI: data.CI, nulled: false },
     });
     if (vote1) {
-      return {msj: 'CI ya votó', succes:false };
+      return { msj: 'CI ya votó', succes: false };
     }
     const vote2 = await this.electionFormRepository.findOne({
       where: { fpv: data.fpv, nulled: false },
     });
     if (vote2) {
-      return {msj: 'FPV ya votó', succes: false};
+      return { msj: 'FPV ya votó', succes: false };
     }
     const rifBuffer = data.Rif ? Buffer.from(data.Rif, 'base64') : null;
     if (!rifBuffer) {
-      return {msj: 'Falta imagen de RIF', succes:false};
+      return { msj: 'Falta imagen de RIF', succes: false };
     }
     const electionForm = this.electionFormRepository.create({
       ...data,
@@ -54,7 +54,7 @@ export class ElectionsFormService {
 
     // this.logger.log(sendMail);
     //await this.addDataToSheet(save);
-    return {msj: 'Exito', succes: true};
+    return { msj: 'Exito', succes: true };
   }
 
   /////////////////////////////////////////////////////////////
@@ -116,14 +116,14 @@ export class ElectionsFormService {
     });
 
     if (!vote) {
-      return {msj: 'Voto no encontrado', succes:false};;
+      return { msj: 'Voto no encontrado', succes: false };
     }
 
     vote.nulled = !vote.nulled;
 
     await this.electionFormRepository.save(vote);
 
-    return {msj: 'Voto modificado', succes:true};;
+    return { msj: 'Voto modificado', succes: true };
   }
 
   /////////////////////////////////////////

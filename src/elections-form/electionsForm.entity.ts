@@ -55,6 +55,9 @@ export class ElectionForm {
   celPhone: string;
 
   @Column()
+  psiSelected: string;
+
+  @Column()
   address: MunicipioCapitalEnum;
 
   @Column({ type: 'bytea', nullable: true }) // Tipo para datos binarios en PostgreSQL

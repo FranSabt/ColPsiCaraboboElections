@@ -22,6 +22,9 @@ export class ElectionsFormDto {
   secondLastName: string;
 
   @IsString()
+  psiSelected: string;
+
+  @IsString()
   @Matches(/^\d+$/, { message: 'CI must contain only numbers' })
   CI: string;
 
