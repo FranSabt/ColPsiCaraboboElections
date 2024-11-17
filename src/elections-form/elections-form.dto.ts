@@ -13,12 +13,14 @@ export class ElectionsFormDto {
   firstName: string;
 
   @IsString()
+  @IsOptional()
   secondName: string;
 
   @IsString()
   lastName: string;
 
   @IsString()
+  @IsOptional()
   secondLastName: string;
 
   @IsString()

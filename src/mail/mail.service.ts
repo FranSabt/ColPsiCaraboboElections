@@ -19,6 +19,7 @@ export class MailService {
       email,
       celPhone,
       address,
+      psi,
     } = userData;
     return `
       <!DOCTYPE html>
@@ -94,7 +95,7 @@ export class MailService {
         <div class="container">
           <div class="logo">
             <a href='https://postimages.org/' target='_blank'>
-              <img src='https://i.postimg.cc/Y02pXHm0/Netcom-Logo.png' border='0' alt='Netcom-Logo'/>
+              <img src='https://i.postimg.cc/cLqxBVcT/COlPSi.jpg' border='0' alt='Netcom-Logo'/>
             </a>
           </div>
           <h2>Colegio de Psicologos de Carabobo - Votación de Representantes 2024</h2>
@@ -108,6 +109,8 @@ export class MailService {
             <p><span><strong>Email:</strong></span> <span>${email}</span></p>
             <p><span><strong>Teléfono Celular:</strong></span> <span>${celPhone}</span></p>
             <p><span><strong>Dirección:</strong></span> <span>${address}</span></p>
+            <p><span><strong>Voto por :</strong></span> <span>${psi}</span></p>
+
           </div>
           
           <div class="footer">
@@ -137,7 +140,7 @@ export class MailService {
 
   async sendCsvReport(html: string, mailAddress: string) {
     await this.mailerService.sendMail({
-      to: [mailAddress, 'fhernandez@netcomplusve.com'],
+      to: [mailAddress, 'infocolegiopsicologoscarabobo@gmail.com'],
       subject: `Colegio de Psicologos del Estado Carabobo - Voto Registrado`,
       html: html,
     });

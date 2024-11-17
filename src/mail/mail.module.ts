@@ -13,12 +13,12 @@ import { join } from 'path';
         host: 'smtp.netcomplusve.com',
         secure: true,
         auth: {
-          user: 'portalpagos@netcomplusve.com',
-          pass: '^dI@*&(7e$46',
+          user: 'fhernandez@netcomplusve.com',
+          pass: 'j2b*c*fE1223',
         },
       },
       defaults: {
-        from: 'portalpagos@netcomplusve.com',
+        from: 'fhernandez@netcomplusve.com',
       },
       template: {
         dir: join(__dirname, 'templates'),
